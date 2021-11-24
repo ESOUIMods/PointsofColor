@@ -4,7 +4,7 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.45"
+local ADDON_VERSION = "2.46"
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
 poc.version = ADDON_VERSION
@@ -182,6 +182,7 @@ local service_textures = {
     {"servicepin_undaunted.dds", 64},
     {"servicepin_vendor.dds", 64},
     {"servicepin_woodworking.dds", 64},
+    {"servicepin_fargraveportal.dds", 64},
 }
 
 local poi_glow_textures = {
