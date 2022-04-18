@@ -4,7 +4,7 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.46"
+local ADDON_VERSION = "2.47"
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
 poc.version = ADDON_VERSION
