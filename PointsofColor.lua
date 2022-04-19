@@ -4,7 +4,8 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.47"
+local ADDON_VERSION = "2.48"
+local SAVEDVARIABLES_VERSION = 3
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
 poc.version = ADDON_VERSION
@@ -219,7 +220,7 @@ local function OnAddOnLoaded(eventCode, addOnName)
     if addOnName ~= poc.appName then
         return
     end
-    poc.SV = ZO_SavedVars:NewAccountWide("PointsofColor_SavedVariables", ADDON_VERSION, defaults, nil)
+    poc.SV = ZO_SavedVars:NewAccountWide("PointsofColor_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
     poc:initLAM(poi_textures_complete, poi_textures_incomplete, service_textures)
     if poc.SV.use_less_saturation_textures == true then
         ui_root = ui_root .. "less_saturation/"
