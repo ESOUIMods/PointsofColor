@@ -4,7 +4,7 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.48"
+local ADDON_VERSION = "2.49"
 local SAVEDVARIABLES_VERSION = 3
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
@@ -219,6 +219,14 @@ local function OnAddOnLoaded(eventCode, addOnName)
 	end
     if addOnName ~= poc.appName then
         return
+    end
+    if PointsofColor_SavedVariables and
+        PointsofColor_SavedVariables.Default and
+        PointsofColor_SavedVariables.Default[GetDisplayName()] and
+        PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"] then
+        if type(PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version) == 'string' then
+          PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version = math.floor(tonumber(PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version))
+        end
     end
     poc.SV = ZO_SavedVars:NewAccountWide("PointsofColor_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
     poc:initLAM(poi_textures_complete, poi_textures_incomplete, service_textures)
