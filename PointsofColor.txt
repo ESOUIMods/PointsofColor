@@ -1,6 +1,6 @@
-## Title: PointsofColor v2.49
-## Version: 2.49
-## AddOnVersion: 249
+## Title: PointsofColor v2.50
+## Version: 2.50
+## AddOnVersion: 250
 ## Author: |cada684Jhenox|r, |cff9b15Sharlikran|r
 ## APIVersion: 101033 101034
 ## SavedVariables: PointsofColor_SavedVariables
