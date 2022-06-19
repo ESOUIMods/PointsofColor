@@ -1,10 +1,10 @@
-## Title: PointsofColor v2.50
-## Version: 2.50
-## AddOnVersion: 250
+## Title: PointsofColor v2.51
+## Version: 2.51
+## AddOnVersion: 251
 ## Author: |cada684Jhenox|r, |cff9b15Sharlikran|r
-## APIVersion: 101033 101034
+## APIVersion: 101034 101035
 ## SavedVariables: PointsofColor_SavedVariables
-## DependsOn: LibAddonMenu-2.0>=33
+## DependsOn: LibAddonMenu-2.0>=34
 
 PointsofColor.lua
 PointsofColor_Settings.lua
