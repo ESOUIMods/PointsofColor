@@ -4,7 +4,7 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.51"
+local ADDON_VERSION = "2.52"
 local SAVEDVARIABLES_VERSION = 3
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
@@ -185,6 +185,7 @@ local service_textures = {
   { "servicepin_woodworking.dds", 64 },
   { "servicepin_fargraveportal.dds", 64 },
   { "servicepin_talesoftribute.dds", 64 },
+  { "servicepin_antiquities.dds", 64 },
 }
 
 local poi_glow_textures = {
@@ -240,6 +241,12 @@ local function OnAddOnLoaded(eventCode, addOnName)
   RedirectTextures("icons/poi/", "poi_textures/", poi_textures_complete)
   RedirectTextures("icons/poi/", "poi_textures/", poi_textures_incomplete)
   RedirectTextures("icons/servicemappins/", "service_textures/", service_textures)
+
+  RedirectTexture(eso_root .. "icons/mapkey/mapkey_buildstation.dds", ui_root .. "other_textures/mapkey_buildstation.dds")
+  RedirectTexture(eso_root .. "icons/servicemappins/servicepin_buildstation.dds", ui_root .. "other_textures/mapkey_buildstation.dds")
+  RedirectTexture(eso_root .. "icons/servicetooltipicons/servicetooltipicon_buildstation.dds", ui_root .. "other_textures/mapkey_buildstation_32.dds")
+  RedirectTexture(eso_root .. "icons/servicetooltipicons/gamepad/gp_servicetooltipicon_buildstation.dds", ui_root .. "other_textures/mapkey_buildstation.dds")
+
   if poc.SV.show_poi_glow_textures == false then
     for i = 1, #poi_glow_textures do
       RedirectTexture(eso_root .. "icons/poi/" .. poi_glow_textures[i][1], ui_root .. "poc_textures/blank.dds")
