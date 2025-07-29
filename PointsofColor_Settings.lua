@@ -34,38 +34,47 @@ local function build_table(index, title, tooltip, path, table_data)
 end
 
 function poc:initLAM(poi_textures_complete, poi_textures_incomplete, service_textures)
-  local optionsTable = {}
-  optionsTable[1] = {
-    type = "submenu",
-    name = "General Options",
-    --tooltip = ""
-    controls = {
-      [1] = {
-        type = "checkbox",
-        name = "Show POI Glow Background",
-        tooltip = "Enable the default glow background on wayshrines and dungeons.",
-        default = false,
-        getFunc = function() return poc.SV.show_poi_glow_textures end,
-        setFunc = function(val) poc.SV.show_poi_glow_textures = val end,
-        width = "full",
-        warning = "The game will need to be completely reloaded to take effect.",
-      },
-      [2] = {
-        type = "checkbox",
-        name = "Less Color Saturation Icons.",
-        tooltip = "This will make PointsofColor load textures with less color saturation.",
-        default = false,
-        getFunc = function() return poc.SV.use_less_saturation_textures end,
-        setFunc = function(val) poc.SV.use_less_saturation_textures = val end,
-        width = "full",
-        warning = "The game will need to be completely reloaded to take effect.",
-      },
-    },
+  local optionsData = {}
+  optionsData[#optionsData + 1] = {
+    type = "description",
+    text = GetString(POC_UNINSTALL_DESC),
   }
-  optionsTable[2] = build_table(2, "View Points of Interest - Complete", "View the textures for completed/discovered/owned points-of-interest.", "esoui\\art\\icons\\poi\\", poi_textures_complete)
-  optionsTable[3] = build_table(3, "View Points of Interest - Incomplete", "View the textures for incomplete/undiscovered/unowned points-of-interest.", "esoui\\art\\icons\\poi\\", poi_textures_incomplete)
-  optionsTable[4] = build_table(4, "View Service Locations", "View the textures for service locations.", "esoui\\art\\icons\\servicemappins\\", service_textures)
+  optionsData[#optionsData + 1] = {
+    type = "description",
+    text = GetString(POC_EXITGAME_DESC),
+  }
+  optionsData[#optionsData + 1] = {
+    type = "header",
+    name = GetString(POC_HEADER_OPTIONS),
+    width = "full"
+  }
+  optionsData[#optionsData + 1] = {
+    type = "checkbox",
+    name = GetString(POC_SHOW_GLOW_BACKGROUND_NAME),
+    tooltip = GetString(POC_SHOW_GLOW_BACKGROUND_TOOLTIP),
+    default = false,
+    getFunc = function() return poc.SV.show_poi_glow_textures end,
+    setFunc = function(val) poc.SV.show_poi_glow_textures = val end,
+    width = "full",
+    warning = "The game will need to be completely reloaded to take effect.",
+  }
+  optionsData[#optionsData + 1] = {
+    type = "checkbox",
+    name = GetString(POC_LESS_SATURATION_ICONS_NAME),
+    tooltip = GetString(POC_LESS_SATURATION_ICONS_TOOLTIP),
+    default = false,
+    getFunc = function() return poc.SV.use_less_saturation_textures end,
+    setFunc = function(val) poc.SV.use_less_saturation_textures = val end,
+    width = "full",
+    warning = "The game will need to be completely reloaded to take effect.",
+  }
+  local pointsOfIntrestCompleteIndex = #optionsData + 1
+  optionsData[pointsOfIntrestCompleteIndex] = build_table(pointsOfIntrestCompleteIndex, "View Points of Interest - Complete", "View the textures for completed/discovered/owned points-of-interest.", "esoui\\art\\icons\\poi\\", poi_textures_complete)
+  local pointsOfIntrestInompleteIndex = #optionsData + 1
+  optionsData[pointsOfIntrestInompleteIndex] = build_table(pointsOfIntrestInompleteIndex, "View Points of Interest - Incomplete", "View the textures for incomplete/undiscovered/unowned points-of-interest.", "esoui\\art\\icons\\poi\\", poi_textures_incomplete)
+  local viewServiceLocationsIndex = #optionsData + 1
+  optionsData[viewServiceLocationsIndex] = build_table(viewServiceLocationsIndex, "View Service Locations", "View the textures for service locations.", "esoui\\art\\icons\\servicemappins\\", service_textures)
 
   LAM:RegisterAddonPanel("PointsofColor", panelData)
-  LAM:RegisterOptionControls("PointsofColor", optionsTable)
+  LAM:RegisterOptionControls("PointsofColor", optionsData)
 end
