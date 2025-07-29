@@ -4,7 +4,7 @@ poc.appName = "PointsofColor"
 ----------------------------------------
 -- Declarations
 ----------------------------------------
-local ADDON_VERSION = "2.53"
+local ADDON_VERSION = "2.54"
 local SAVEDVARIABLES_VERSION = 3
 local eso_root = "esoui/art/"
 local ui_root = "PointsofColor/"
@@ -222,17 +222,41 @@ local function OnAddOnLoaded(eventCode, addOnName)
   if addOnName ~= poc.appName then
     return
   end
-  if PointsofColor_SavedVariables and
-    PointsofColor_SavedVariables.Default and
-    PointsofColor_SavedVariables.Default[GetDisplayName()] and
-    PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"] then
-    if PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version == "" then
-      PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version = 2
+
+  local function NormalizeSavedVarsVersion(svTable)
+    if not svTable or not svTable.Default then return end
+
+    local displayName = GetDisplayName()
+    local accountData = svTable.Default[displayName] and svTable.Default[displayName]["$AccountWide"]
+    if not accountData then return end
+
+    local rawVersion = accountData.version
+    if rawVersion == nil then
+      accountData.version = 2
+      return
     end
-    if type(PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version) == 'string' then
-      PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version = math.floor(tonumber(PointsofColor_SavedVariables.Default[GetDisplayName()]["$AccountWide"].version))
+
+    if rawVersion == SAVEDVARIABLES_VERSION then return end
+
+    local isVersionEmptyString = rawVersion == ""
+    local isVersionString = type(rawVersion) == "string"
+
+    if isVersionEmptyString then
+      accountData.version = 2
+    elseif isVersionString then
+      local major = tonumber(rawVersion:match("^(%d+)"))
+      if major then
+        accountData.version = math.floor(major)
+      else
+        accountData.version = 2
+      end
+    elseif type(rawVersion) ~= "number" then
+      accountData.version = 2
     end
   end
+
+  NormalizeSavedVarsVersion(PointsofColor_SavedVariables)
+
   poc.SV = ZO_SavedVars:NewAccountWide("PointsofColor_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
   poc:initLAM(poi_textures_complete, poi_textures_incomplete, service_textures)
   if poc.SV.use_less_saturation_textures == true then
