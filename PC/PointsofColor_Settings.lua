@@ -75,6 +75,6 @@ function poc:initLAM(poi_textures_complete, poi_textures_incomplete, service_tex
   local viewServiceLocationsIndex = #optionsData + 1
   optionsData[viewServiceLocationsIndex] = build_table(viewServiceLocationsIndex, "View Service Locations", "View the textures for service locations.", "esoui\\art\\icons\\servicemappins\\", service_textures)
 
-  LAM:RegisterAddonPanel("PointsofColor", panelData)
-  LAM:RegisterOptionControls("PointsofColor", optionsData)
+  LAM:RegisterAddonPanel("PointsofColor_OptionsPanel", panelData)
+  LAM:RegisterOptionControls("PointsofColor_OptionsPanel", optionsData)
 end
